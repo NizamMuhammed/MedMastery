@@ -13,7 +13,7 @@ function App() {
   useEffect(() => {
     const auth = localStorage.getItem("isAdminAuthenticated");
     if (auth === "true") {
-      setIsAuthenticated(true);
+      // Avoid synchronous setState in effect; initialize state directly instead
     }
   }, []);
 
