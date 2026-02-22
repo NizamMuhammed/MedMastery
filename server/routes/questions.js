@@ -188,7 +188,11 @@ router.get('/', async (req, res) => {
     }
   } else {
     console.log('Serving from memory store');
-    res.json(memoryQuestions.sort((a, b) => (a.order || 0) - (b.order || 0) || b.createdAt - a.createdAt));
+    res.json(memoryQuestions.sort((a, b) => {
+      const orderDiff = (a.order || 0) - (b.order || 0);
+      if (orderDiff !== 0) return orderDiff;
+      return new Date(b.createdAt) - new Date(a.createdAt);
+    }));
   }
 });
 
